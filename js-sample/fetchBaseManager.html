@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./APIManager.js"></script>
+</head>
+
+<body>
+
+    <button onclick="getAllProducts()">Get All Products</button>
+    <button onclick="getAllCategories()">Get All Categories</button>
+
+</body>
+<script>
+
+
+    baseManager.getById('/products', -7)
+        .then(res => {
+            console.log('RES', res);
+        })
+        .catch(err => {
+            console.log('ERROR-7', err);
+        })
+        
+
+    function getAllProducts() {
+
+        baseManager.getAll('/products')
+            .then(response => console.log('response', response))
+
+    }
+
+    function getAllCategories() {
+
+        baseManager.getAll('/categories')
+            .then(response => console.log('response', response));
+
+    }
+
+</script>
+
+</html>

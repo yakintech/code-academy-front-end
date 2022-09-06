@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+
+
+    async function hello(number) {
+        if (number == 1) {
+            return "Hello World!";
+        }
+        else {
+            throw "Ex"
+        }
+    }
+
+
+    // hello(-1)
+    //     .then(data => {
+    //         console.log('DATA', data);
+    //     })
+    //     .catch(msg => {
+    //         console.log('msg', msg);
+    //     })
+
+
+    async function getProducts() {
+
+        let response = [];
+
+        await fetch('https://northwind.vercel.app/api/products')
+            .then(res => res.json())
+            .then(data => {
+                response = data;
+            })
+
+        return response;
+
+    }
+
+
+    getProducts()
+        .then(data => {
+            console.log('DATA', data);
+        })
+
+    // console.log('RESPONSE', getProducts());
+
+
+
+</script>
+
+</html>

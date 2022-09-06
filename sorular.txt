@@ -1,0 +1,16 @@
+1) EmployeeId si 5 olan çalışanımın sattığı ürünlerin toplam fiyatı nedir?
+2) En sevdiğim müşterim?
+3) En az alışveriş yapan müşterim?
+4) 1996 yılında verilen siparişleri bana getir
+5) Geciken siparişlerimi bana getir
+6) FOLKO isimli müşterimin siparişlerinin ortalama fiyatı nedir?
+
+
+1) Sweden ülkesinden verilen siparişlerin toplam fiyatı nedir?
+2) Sweden ülkesinden verilen siparişlerin ortalama fiyatı nedir?
+3) Sweden ülkesinden verilen en düşük sipariş
+4) Sweden ülkesinden verilen en yüksek sipariş
+
+
+1) Ekkrana bir select koy. Optionları productName ile doldur. Option içeriği productName value lar ilse ProductId
+

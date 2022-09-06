@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+    function calc(x,y,z){
+
+        var result = (x * y) * 1.18;
+        z(result);
+
+    }
+
+    calc(2,5,myfunc);
+
+    function myfunc(data){
+        console.log("data",data);
+    }
+
+    var cities = ['İstanbul','Baku','Petersburg','Moskova'];
+
+
+    cities.map(function(item,key){
+        console.log(item);
+    })
+
+
+    cities.forEach(getForeachItem)
+
+
+    function getForeachItem(item){
+        console.log(item);
+    }
+
+    
+
+
+</script>
+
+</html>

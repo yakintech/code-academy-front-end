@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div>
+        <label for="">Id:</label>
+        <input type="text" name="" id="id">
+    </div>
+    <div>
+        <button onclick="deleteCategory()">Delete</button>
+    </div>
+
+    <button onclick="postTest()">Post Test</button>
+
+</body>
+
+<script>
+
+    // HTTP Request Methods -> GET,POST, PUT, DELETE ...
+    //res.json ile response içerisindeki body i okuyup js objesine çeviriyorum!
+
+    //fetch burada DEFAULT olarak bir GET isteği atıyor
+    fetch("https://northwind.vercel.app/api/categories")
+        .then(res => res.json())
+        .then(data => console.log('DATA', data))
+
+
+    fetch('https://northwind.vercel.app/api/categories')
+        .then(res => console.log('Res', res))
+
+
+    //HTTP post request
+    function postTest() {
+        let fetchRequestOptions = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name: 'Sport', description: 'Sport products...' })
+        }
+
+        fetch('https://northwind.vercel.app/api/categories', fetchRequestOptions)
+    }
+
+    function deleteCategory() {
+        var id = document.getElementById('id').value;
+
+        fetch(`https://northwind.vercel.app/api/categories/${id}`, {
+            method: 'DELETE'
+        })
+    }
+
+
+
+
+    
+
+
+
+</script>
+
+</html>
