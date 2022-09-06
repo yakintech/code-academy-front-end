@@ -30,114 +30,114 @@
 </body>
 <script>
 
-    let columns = [
-        {
-            key: 'name',
-            title: 'Name',
-            //sort: true
-        },
-        {
-            key: 'unitPrice',
-            title: 'Unit Price',
-            // sort: false
-        },
-    ];
+            let columns = [
+                {
+                    key: 'name',
+                    title: 'Name',
+                    //sort: true
+                },
+                {
+                    key: 'unitPrice',
+                    title: 'Unit Price',
+                    // sort: false
+                },
+            ];
 
 
 
 
-    //document ready nedir?
+            //document ready nedir?
 
 
 
-    let products = []
-    baseManager.getAll('/products')
-        .then(data => {
+            let products = []
+            baseManager.getAll('/products')
+                .then(data => {
 
-            products = data;
-
-
-            generate(products, columns);
-
-            //renderTable(data);
-
-        })
-
-    //Name isimli td ye tıkladığımda sıralama yapacak. Bir kere daha tıklarsam tersten sıralayacak.
-
-    //1. o td ye onClick event bağlayabilirim
-    //2. o td ye id verip o id üzerinden yakalayabilirim
-    //3.document.querySelector('td:first-child') gibi...
+                    products = data;
 
 
-    let orderNameStatus = 1
-    const orderByName = () => {
+                    generate(products, columns);
 
-        products = products.sort((a, b) => {
-            let fa = a.name.toLowerCase(),
-                fb = b.name.toLowerCase();
+                    //renderTable(data);
 
-            if (fa < fb) {
-                return -orderNameStatus;
+                })
+
+            //Name isimli td ye tıkladığımda sıralama yapacak. Bir kere daha tıklarsam tersten sıralayacak.
+
+            //1. o td ye onClick event bağlayabilirim
+            //2. o td ye id verip o id üzerinden yakalayabilirim
+            //3.document.querySelector('td:first-child') gibi...
+
+
+            let orderNameStatus = 1
+            const orderByName = () => {
+
+                products = products.sort((a, b) => {
+                    let fa = a.name.toLowerCase(),
+                        fb = b.name.toLowerCase();
+
+                    if (fa < fb) {
+                        return -orderNameStatus;
+                    }
+                    if (fa > fb) {
+                        return orderNameStatus;
+                    }
+                    return 0;
+                });
+                renderTable(products);
+                orderNameStatus = -orderNameStatus
             }
-            if (fa > fb) {
-                return orderNameStatus;
+
+
+            const orderByUnitPrice = () => {
+
+                products = products.sort((a, b) => {
+                    return a.unitPrice - b.unitPrice;
+                });
+
+                renderTable(products);
             }
-            return 0;
-        });
-        renderTable(products);
-        orderNameStatus = -orderNameStatus
-    }
-
-
-    const orderByUnitPrice = () => {
-
-        products = products.sort((a, b) => {
-            return a.unitPrice - b.unitPrice;
-        });
-
-        renderTable(products);
-    }
 
 
 
-    const renderTable = (data) => {
-        var productsTable = document.getElementById('products');
+            const renderTable = (data) => {
+                var productsTable = document.getElementById('products');
 
-        DeleteRows();
+                DeleteRows();
 
-        data.forEach(element => {
+                data.forEach(element => {
 
-            var trElement = document.createElement('tr');
+                    var trElement = document.createElement('tr');
 
-            var tdIdElement = document.createElement('td');
-            tdIdElement.innerHTML = element.id;
+                    var tdIdElement = document.createElement('td');
+                    tdIdElement.innerHTML = element.id;
 
-            var tdNameElement = document.createElement('td');
-            tdNameElement.innerHTML = element.name;
+                    var tdNameElement = document.createElement('td');
+                    tdNameElement.innerHTML = element.name;
 
-            var tdPriceElement = document.createElement('td');
-            tdPriceElement.innerHTML = element.unitPrice;
+                    var tdPriceElement = document.createElement('td');
+                    tdPriceElement.innerHTML = element.unitPrice;
 
 
-            trElement.appendChild(tdIdElement);
-            trElement.appendChild(tdNameElement);
-            trElement.appendChild(tdPriceElement);
+                    trElement.appendChild(tdIdElement);
+                    trElement.appendChild(tdNameElement);
+                    trElement.appendChild(tdPriceElement);
 
-            productsTable.appendChild(trElement);
+                    productsTable.appendChild(trElement);
 
-        });
+                });
 
-    }
+            }
 
-    function DeleteRows() {
-        var productsTable = document.getElementById('products');
+            function DeleteRows() {
+                var productsTable = document.getElementById('products');
 
-        var rowCount = productsTable.rows.length;
-        for (var i = rowCount - 1; i > 0; i--) {
-            productsTable.deleteRow(i);
-        }
-    }
+                var rowCount = productsTable.rows.length;
+                for (var i = rowCount - 1; i > 0; i--) {
+                    productsTable.deleteRow(i);
+                }
+            }
 
     // let tdRows = document.querySelectorAll("tr td")
     // tdRows.forEach(td => {
