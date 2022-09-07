@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <h1>Baku</h1>
+    <h1>İstanbul</h1>
+    <h1>Ankara</h1>
+
+    <p id="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore eaque doloribus numquam fuga expedita nesciunt optio excepturi repudiandae? Incidunt unde, consectetur ab temporibus qui numquam. Harum distinctio molestias ipsum quidem!</p>
+    <button>Change Content</button>
+
+</body>
+<script>
+
+    //h1 e click olduğunda çalışan kod
+    $("h1").click(function(){
+        console.log('h1 clicked!', this);
+    })
+
+
+    //Butona click olduğunda id si content olan elemanın içerisindeki content i değiştir.
+    $("button").click(function(){
+
+        $("#content").text("Çağatay Yıldız");
+
+    })
+
+</script>
+
+</html>
