@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <input type="text" id="search" placeholder="search by name..." />
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Unit Price</th>
+                <th>Units In Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+</body>
+<script>
+
+    //pagination yani sayfalama yapılacak!!
+    
+    //Ürünleri bir tabloda göster. Daha sonra yukarıya bir input koy. Inputta veri girişi yaptıkça tablo içerisinde serach etsin. Daha sonra tabloya sıralama koy.
+
+
+    //orjinal DATA
+    let products = [];
+
+
+    fetch('https://northwind.vercel.app/api/products')
+        .then(res => res.json())
+        .then(data => {
+
+            products = data;
+            fillTable(data);
+        })
+
+
+    document.getElementById('search').addEventListener('keyup', function () {
+
+        let searchValue = document.getElementById('search').value.toLowerCase();
+        let filteredData = products.filter(q => q.name.toLowerCase().includes(searchValue));
+
+        fillTable(filteredData);
+
+    });
+
+
+    const fillTable = (data) => {
+
+   
+        document.getElementsByTagName('tbody')[0].innerHTML = ""
+
+        data.forEach(element => {
+
+            var trElement = document.createElement('tr');
+
+            var tdIdElement = document.createElement('td');
+            tdIdElement.innerHTML = element.id;
+
+            var tdNameElement = document.createElement('td');
+            tdNameElement.innerHTML = element.name;
+
+            var tdPriceElement = document.createElement('td');
+            tdPriceElement.innerHTML = element.unitPrice;
+
+            var tdStockElement = document.createElement('td');
+            tdStockElement.innerHTML = element.unitPrice;
+
+
+            trElement.appendChild(tdIdElement);
+            trElement.appendChild(tdNameElement);
+            trElement.appendChild(tdPriceElement);
+
+            document.getElementsByTagName('tbody')[0].appendChild(trElement);
+
+        });
+
+    }
+
+
+
+
+</script>
+
+</html>
