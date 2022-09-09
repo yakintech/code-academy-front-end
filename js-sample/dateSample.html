@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+</body>
+<script>
+    fetch("https://northwind.vercel.app/api/orders")
+        .then(res => res.json())
+        .then(data => {
+
+            data.forEach(element => {
+                
+                console.log('order Date', element.orderDate);
+
+            });
+        })
+
+
+        //Bir table oluştur. ve order bazı kolonları yaz. 
+        
+        //* Order Date kısmını "20 Mayıs 1999" formatında yaz.
+
+        //* Custom bir kolon ekle (OrderDate-2 ) Bu kolonda mevcut order üzerine bir ay eklensin ve yazılsın. Örneğin orderDate 22 Mayıs ise 22 Haziran olsun.
+
+        //* Custom bir kolon ekle (OrderDate-3 ) Bu kolonda mevcut order üzerine bir hafta eklensin ve yazılsın. Örneğin orderDate 22 Mayıs ise 29 Mayıs olsun.
+
+
+        //* Custom bir kolon ekle (OrderDate-4 ) Bu kolonda mevcut orderdan 10 gün öncesi yazsın.
+
+        // //* Custom bir kolon ekle (OrderDate-5 ) Bu kolonda OrderDate Azerbaycan saat dilimine göre yazsın ((GMT+4)) Mevcut orderDate GMT-0 kabul edebilirsiniz.
+
+
+        //Sadece pazartesi günü olan siparişleri yaz.
+
+        
+
+    
+
+
+
+
+</script>
+
+</html>
