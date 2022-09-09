@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div>
+        <input type="text" id="pageSize" />
+        <button id="getOrders">Get</button>
+    </div>
+
+    <ul id="orders">
+
+    </ul>
+    <div id="pageNumbers">
+
+    </div>
+</body>
+<script>
+
+    document.getElementById('getOrders').addEventListener('click', function () {
+
+        let pageSize = Number(document.getElementById('pageSize').value);
+
+        //Örneğin kullanıcı 5 erli sayfalamak istiyor.
+
+
+        fetch("https://northwind.vercel.app/api/orders")
+            .then(res => res.json())
+            .then(data => {
+
+                // data.forEach(element => {
+                //     var liElement = document.createElement('li');
+                //     liElement.innerText = element.shipName;
+
+                //     document.getElementById('orders').appendChild(liElement);
+                // });
+
+                let pageCount = Math.ceil(data.length / pageSize)
+
+                for (let i = 1; i <= pageCount; i++) {
+
+                    let pageDiv = document.getElementById('pageNumbers')
+
+                    var pageSpan = document.createElement('span');
+                    pageSpan.innerText = i;
+                    pageSpan.style.marginLeft = '10px';
+                    pageSpan.style.color = 'blue';
+                    pageSpan.style.cursor = 'pointer';
+
+                    pageSpan.addEventListener("click", function(e){
+
+                        let pageNumber = e.target.innerText
+                        console.log('pageNumber', pageNumber);
+
+                    })
+
+                    pageDiv.appendChild(pageSpan);
+
+                }
+
+            })
+    })
+
+
+
+</script>
+
+</html>
