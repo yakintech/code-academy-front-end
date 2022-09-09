@@ -12,10 +12,10 @@
 
     <div>
         <input type="text" id="pageSize" />
-        <button id="getOrders">Get</button>
+        <button id="getproducts">Get</button>
     </div>
 
-    <ul id="orders">
+    <ul id="products">
 
     </ul>
     <div id="pageNumbers">
@@ -24,49 +24,68 @@
 </body>
 <script>
 
-    document.getElementById('getOrders').addEventListener('click', function () {
+    let products = [];
+    fetch("https://northwind.vercel.app/api/products")
+        .then(res => res.json())
+        .then(data => {
+            products = data;
+        })
+
+    document.getElementById('getproducts').addEventListener('click', function () {
 
         let pageSize = Number(document.getElementById('pageSize').value);
 
         //Örneğin kullanıcı 5 erli sayfalamak istiyor.
 
+        let startData = products.slice(0, pageSize)
+        renderTable(startData)
 
-        fetch("https://northwind.vercel.app/api/orders")
-            .then(res => res.json())
-            .then(data => {
+        let pageCount = Math.ceil(products.length / pageSize)
 
-                // data.forEach(element => {
-                //     var liElement = document.createElement('li');
-                //     liElement.innerText = element.shipName;
 
-                //     document.getElementById('orders').appendChild(liElement);
-                // });
 
-                let pageCount = Math.ceil(data.length / pageSize)
+        for (let i = 1; i <= pageCount; i++) {
 
-                for (let i = 1; i <= pageCount; i++) {
+            let pageDiv = document.getElementById('pageNumbers')
 
-                    let pageDiv = document.getElementById('pageNumbers')
+            var pageSpan = document.createElement('span');
+            pageSpan.innerText = i;
+            pageSpan.style.marginLeft = '10px';
+            pageSpan.style.color = 'blue';
+            pageSpan.style.cursor = 'pointer';
 
-                    var pageSpan = document.createElement('span');
-                    pageSpan.innerText = i;
-                    pageSpan.style.marginLeft = '10px';
-                    pageSpan.style.color = 'blue';
-                    pageSpan.style.cursor = 'pointer';
+            pageSpan.addEventListener("click", function (e) {
 
-                    pageSpan.addEventListener("click", function(e){
+                let pageNumber = Number(e.target.innerText)
 
-                        let pageNumber = e.target.innerText
-                        console.log('pageNumber', pageNumber);
-
-                    })
-
-                    pageDiv.appendChild(pageSpan);
-
-                }
+                let startIndex = pageSize * (pageNumber - 1)
+                let filteredData = products.slice(startIndex, startIndex + pageSize);
+                renderTable(filteredData);
 
             })
+
+            pageDiv.appendChild(pageSpan);
+
+        }
+
+
+
     })
+
+
+    const renderTable = (data) => {
+
+        document.getElementById('products').innerHTML = "";
+
+        data.forEach(element => {
+            var liElement = document.createElement('li');
+            liElement.innerText = element.name;
+
+            document.getElementById('products').appendChild(liElement);
+        });
+
+
+    }
 
 
 
